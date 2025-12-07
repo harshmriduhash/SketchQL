@@ -1,24 +1,23 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const fetchUser = require('../middleware/fetchUser'); 
-
+const fetchUser = require("../middleware/fetchUser");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-router.post('/generate', fetchUser, async (req, res) => {
-    const { userPrompt } = req.body;
+router.post("/generate", fetchUser, async (req, res) => {
+  const { userPrompt } = req.body;
 
-    if (!userPrompt) {
-        return res.status(400).json({ error: "Prompt is required" });
-    }
+  if (!userPrompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
 
-    try {
-        const model = genAI.getGenerativeModel({ 
-            model:"gemini-2.5-flash", 
-            generationConfig: { responseMimeType: "application/json" }
-        });
+  try {
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      generationConfig: { responseMimeType: "application/json" },
+    });
 
-        const systemPrompt = `
+    const systemPrompt = `
         You are a Database Architect. 
         The user will describe an application. You must design the database schema.
 
@@ -65,23 +64,26 @@ router.post('/generate', fetchUser, async (req, res) => {
         - RESPONSE MUST BE RAW JSON.
         `;
 
-        const result = await model.generateContent(systemPrompt);
-        const response = await result.response;
-        let text = response.text();
-        
-  
-        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    const result = await model.generateContent(systemPrompt);
+    const response = await result.response;
+    let text = response.text();
 
-      
+    text = text
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-        const jsonResult = JSON.parse(text);
-        
-        res.json(jsonResult);
+    const jsonResult = JSON.parse(text);
 
-    } catch (error) {
-        console.error("Gemini AI Error Details:", error);
-        res.status(500).json({ error: "Failed to generate schema. Check server console for details." });
-    }
+    res.json(jsonResult);
+  } catch (error) {
+    console.error("Gemini AI Error Details:", error);
+    res
+      .status(500)
+      .json({
+        error: "Failed to generate schema. Check server console for details.",
+      });
+  }
 });
 
 module.exports = router;
