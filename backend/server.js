@@ -70,6 +70,10 @@ app.use('/api/ai', aiLimiter);
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/diagramss', require('./routes/diagrams')); 
+app.use('/api/schema', require('./routes/schema'));
+app.use('/api/projects', require('./routes/versions'));
+app.use('/api', require('./routes/versions'));
+app.use('/api/github', require('./routes/github'));
 app.use('/', require('./routes/social')); 
 
 

@@ -5,6 +5,12 @@ import CodeExportModal from '../codeGenerator/CodeExportModal';
 import axios from 'axios';
 import { useAuthStore } from '../../Store/authStore';
 import AiModal from '../codeGenerator/AiModal';
+import RefactorModal from '../schema/RefactorModal';
+import MigrationPanel from '../schema/MigrationPanel';
+import VersionsPanel from '../schema/VersionsPanel';
+import MockDataPanel from '../schema/MockDataPanel';
+import QueryGeneratorPanel from '../schema/QueryGeneratorPanel';
+import GitHubSyncPanel from '../schema/GitHubSyncPanel';
 import { toPng } from 'html-to-image';
 import { useNavigate } from "react-router-dom"
 
@@ -17,6 +23,12 @@ export default function NavBar(){
     };
     const { nodes, edges, currentProjectId, projectName, setProjectName, loadProject, clearCanvas,resetCanvas } = useStore();
     const [showAiModal, setShowAiModal] = useState(false);
+    const [showRefactorModal, setShowRefactorModal] = useState(false);
+    const [showMigrationModal, setShowMigrationModal] = useState(false);
+    const [showVersionsModal, setShowVersionsModal] = useState(false);
+    const [showMockDataModal, setShowMockDataModal] = useState(false);
+    const [showQueryModal, setShowQueryModal] = useState(false);
+    const [showGitHubModal, setShowGitHubModal] = useState(false);
     const { token } = useAuthStore();
     
     const [showModal, setShowModal] = useState(false);
@@ -158,6 +170,43 @@ export default function NavBar(){
                                 >Ask AI
                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm457-560 21-89-71-59 94-8 36-84 36 84 94 8-71 59 21 89-80-47-80 47ZM480-481Z"/></svg></a>
                             </li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowRefactorModal(true)}
+                                >Refactor with AI
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></a>
+                            </li>
+                            <li className="dropdown-divider"></li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowMigrationModal(true)}
+                                >Database Migration
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M480-120 200-400l56-56 184 184 400-400 56 56L480-120Z"/></svg></a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowVersionsModal(true)}
+                                >Schema Versions
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Z"/></svg></a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowMockDataModal(true)}
+                                >Generate Mock Data
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Z"/></svg></a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowQueryModal(true)}
+                                >Query Generator
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Z"/></svg></a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item" 
+                                onClick={() => setShowGitHubModal(true)}
+                                >Sync from GitHub
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="28px" fill="#918c8cff"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h320l80 80h320q33 0 56.5 23.5T960-600v400q0 33-23.5 56.5T880-120H160Zm0-80h720v-400H447l-80-80H160v480Zm0 0v-480 480Z"/></svg></a>
+                            </li>
                         </ul>
                         </li>
                         <li className="nav-item ">
@@ -210,6 +259,30 @@ export default function NavBar(){
                  <AiModal 
                     isOpen={showAiModal} 
                     onClose={() => setShowAiModal(false)} 
+                />
+                <RefactorModal 
+                    isOpen={showRefactorModal} 
+                    onClose={() => setShowRefactorModal(false)} 
+                />
+                <MigrationPanel 
+                    isOpen={showMigrationModal} 
+                    onClose={() => setShowMigrationModal(false)} 
+                />
+                <VersionsPanel 
+                    isOpen={showVersionsModal} 
+                    onClose={() => setShowVersionsModal(false)} 
+                />
+                <MockDataPanel 
+                    isOpen={showMockDataModal} 
+                    onClose={() => setShowMockDataModal(false)} 
+                />
+                <QueryGeneratorPanel 
+                    isOpen={showQueryModal} 
+                    onClose={() => setShowQueryModal(false)} 
+                />
+                <GitHubSyncPanel 
+                    isOpen={showGitHubModal} 
+                    onClose={() => setShowGitHubModal(false)} 
                 />
 
             </>
