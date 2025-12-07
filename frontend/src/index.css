@@ -1,0 +1,255 @@
+:root{
+    --main-color:#6366F1;
+    --main-color-hover:#4F46E5;
+}
+/* body{
+     font-family: "Comfortaa", sans-serif;
+} */
+.main-primary-color{
+    background-color: var(--main-color);
+}
+.main-bg-color-1{
+    background-color: #f1f5f9;
+}
+.main-bg-grad {
+    background: linear-gradient(to bottom, #ffffff 0%, #f1f5f9 100%);
+    
+}
+.main-bg-grad-2 {
+    background: linear-gradient(to bottom,#f1f5f9 0%, #ffffff 100%);
+    
+}
+.main-text-color{
+    color: #64748b;
+}
+.main-text-primary-color{
+    color: var(--main-color);
+}
+.btn-hover-color:hover{
+    background-color: var(--main-color-hover);
+}
+.text-hover:hover{
+    color: black;
+}
+.btn-hover-text1:hover{
+    color: var(--main-color-hover);
+}
+
+.heading-fs{
+    font-size: 8vh;
+    
+    font-weight: 900;
+}
+
+.subHeading-w1{
+    width: 55vw;
+    margin-left: 18.5vw;
+}
+.subHeading-w2{
+    width: 55vw;
+    margin-left: 22vw;
+}
+.subHeading-w3{
+    width: 36vw;
+}
+.subHeading-w4{
+    width: 22vw;
+}
+.img-1{
+    width: 75vw;
+    height: 85vh;
+}
+.img-2{
+    width: 15vw;
+    height: 9vh;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.img-2:hover{
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+.price-card{
+    height: 70vh;
+    width: 25vw;
+}
+.price-card-upper{
+    height: 12px;
+    width: 25vw;
+
+}
+.high-1{
+    height: 6px;
+}
+
+.new-color1{
+    background-color: var(--main-color);
+}
+.footer-color{
+    background-color: #1E293B;
+}
+.footer-text{
+    color: var(--main-color);
+}
+.footer-text2{
+    cursor: pointer;
+}
+.footer-text2:hover{
+    cursor: pointer;
+    color: white;
+}
+.login-card{
+    width: 30vw;
+}
+
+.btn:focus, 
+.btn:active, 
+.btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.form-control:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.fc{
+    box-shadow: none !important;
+    outline: none !important;
+}
+.dashboard-h{
+    height: 40vh;
+}
+
+
+.borderc2{
+    border-top: 5px solid var(--main-color);
+}
+.canvas-nav{
+    font-size: 1rem;
+}
+.canvas-nav-hover:hover {
+    background-color: #4F46E5;
+}
+.canvas-navc {
+    background-color: #6366F1;
+}
+.canvas-nav-btn-hover:hover{
+    background-color: #f1f5f9;
+    color: #0f0f0f !important;
+}
+
+
+.ai-glow-button {
+            position: relative;
+            border: none; 
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 30px;
+            background-clip: padding-box; 
+            z-index: 1;
+            overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 0; 
+            
+        }
+
+        @keyframes spin-glow {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        
+        .ai-glow-button::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            top: 50%;
+            left: 50%;
+            width: 400%; 
+            height: 400%;
+            
+            background: conic-gradient(
+                transparent 0deg,
+                #fcf9f9 20deg,  
+                #d7d7d7 20deg,  
+                #fff30e 20deg,  
+                #f9fafc 20deg,  
+                
+                #ffffff 80deg,  
+                transparent 120deg
+            );
+
+            animation: spin-glow 4s linear infinite;
+        }
+
+            .ai-glow-button::after {
+            content: '';
+            position: absolute;
+            z-index: -1; 
+            inset: 3px; 
+            
+            background: linear-gradient(90deg, #32b6d0, #03E1B8); 
+            
+            border-radius: 0; 
+        }
+.nit::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important; 
+    opacity: 1;
+}
+
+.hv svg:hover{
+    color: #ff0707;
+}
+
+.sidebar-table-color{
+    background-color: #F1F5F9;
+}
+.sidebar-table-color2{
+    background-color: #C7D2FE
+}
+
+.logo{
+    height: 2.2rem;
+    border-radius: 10px;
+    
+}
+
+.illustration{
+    height: 27rem;
+    position: absolute;
+    top:-5rem;
+}
+.illustration2{
+    height: 27rem;
+    position: absolute;
+    top:-5rem;
+}
+.illustration3{
+    height: 19rem;
+    position: absolute;
+    top:-4rem;
+    right: 8rem;
+}
+.illustration4{
+    height: 4rem;
+    position: absolute;
+    left: 29rem;
+    top: -0.2rem;
+}
+
+.left{
+    width: 95%;
+    bottom: 4rem;
+    left: 2rem;
+}
+.right {
+    right: 48%;
+    bottom: 1rem;}
